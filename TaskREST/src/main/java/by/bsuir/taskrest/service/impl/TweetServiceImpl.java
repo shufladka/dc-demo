@@ -50,12 +50,8 @@ public class TweetServiceImpl implements TweetService {
                     if (tweetRequestTo.userId() != null) {
                         entity.setUserId(tweetRequestTo.userId());
                     }
-                    if (tweetRequestTo.title() != null) {
-                        entity.setTitle(tweetRequestTo.title());
-                    }
-                    if (tweetRequestTo.content() != null) {
-                        entity.setContent(tweetRequestTo.content());
-                    }
+                    entity.setTitle(tweetRequestTo.title());
+                    entity.setContent(tweetRequestTo.content());
                     entity.setModified(LocalDateTime.now());
                     return entity;
                 })

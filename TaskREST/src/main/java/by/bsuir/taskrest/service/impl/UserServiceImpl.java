@@ -4,7 +4,6 @@ import by.bsuir.taskrest.exception.EntityNotFoundException;
 import by.bsuir.taskrest.exception.EntitySavingException;
 import by.bsuir.taskrest.model.dto.request.UserRequestTo;
 import by.bsuir.taskrest.model.dto.response.UserResponseTo;
-import by.bsuir.taskrest.model.entity.User;
 import by.bsuir.taskrest.model.mapper.UserMapper;
 import by.bsuir.taskrest.repository.impl.UserRepository;
 import by.bsuir.taskrest.service.UserService;
