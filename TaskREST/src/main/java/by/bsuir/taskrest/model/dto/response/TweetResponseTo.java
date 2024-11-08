@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 public record TweetResponseTo(
         Long id,
-        Long authorId,
+        Long userId,
         String title,
         String content,
         LocalDateTime created,
