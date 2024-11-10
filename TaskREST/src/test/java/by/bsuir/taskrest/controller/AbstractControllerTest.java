@@ -19,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-public abstract class RestControllerTest<RequestTo, ResponseTo> {
+public abstract class AbstractControllerTest<RequestTo, ResponseTo> {
 
     @Autowired
     private static ServerConfig serverConfig;

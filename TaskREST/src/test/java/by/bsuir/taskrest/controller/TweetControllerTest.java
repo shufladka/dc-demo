@@ -6,7 +6,7 @@ import by.bsuir.taskrest.model.dto.response.TweetResponseTo;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterAll;
 
-public class TweetControllerTest extends RestControllerTest<TweetRequestTo, TweetResponseTo> {
+public class TweetControllerTest extends AbstractControllerTest<TweetRequestTo, TweetResponseTo> {
 
     private static boolean isFKCreated = false;
     private static Long fkUserId;

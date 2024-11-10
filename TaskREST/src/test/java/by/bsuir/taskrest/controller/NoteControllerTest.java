@@ -7,7 +7,7 @@ import by.bsuir.taskrest.model.dto.response.NoteResponseTo;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterAll;
 
-public class NoteControllerTest extends RestControllerTest<NoteRequestTo, NoteResponseTo> {
+public class NoteControllerTest extends AbstractControllerTest<NoteRequestTo, NoteResponseTo> {
 
     private static boolean isFKCreated = false;
     private static Long fkUserId;

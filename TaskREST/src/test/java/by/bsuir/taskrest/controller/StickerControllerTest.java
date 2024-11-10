@@ -3,7 +3,7 @@ package by.bsuir.taskrest.controller;
 import by.bsuir.taskrest.model.dto.request.StickerRequestTo;
 import by.bsuir.taskrest.model.dto.response.StickerResponseTo;
 
-public class StickerControllerTest extends RestControllerTest<StickerRequestTo, StickerResponseTo> {
+public class StickerControllerTest extends AbstractControllerTest<StickerRequestTo, StickerResponseTo> {
 
     @Override
     protected String getRequestsMappingPath() {

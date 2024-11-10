@@ -3,7 +3,7 @@ package by.bsuir.taskrest.controller;
 import by.bsuir.taskrest.model.dto.request.UserRequestTo;
 import by.bsuir.taskrest.model.dto.response.UserResponseTo;
 
-public class UserControllerTest extends RestControllerTest<UserRequestTo, UserResponseTo> {
+public class UserControllerTest extends AbstractControllerTest<UserRequestTo, UserResponseTo> {
 
     @Override
     protected String getRequestsMappingPath() {
