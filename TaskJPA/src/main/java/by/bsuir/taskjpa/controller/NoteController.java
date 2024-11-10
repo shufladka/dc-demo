@@ -12,13 +12,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/notes")
-public class NoteController {
+public class NoteController extends AbstractController {
 
     private final NoteService service;
 
@@ -55,28 +54,5 @@ public class NoteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @Valid Long id) {
         service.delete(id);
-    }
-
-    private List<Order> getSortOrders(String[] sortParameters) {
-        List<Order> sortOrders = new ArrayList<>();
-        if (isMultipleSortsOrders(sortParameters)) {
-            for (String sortParameter : sortParameters) {
-                String[] sort = sortParameter.split(",");
-                sortOrders.add(new Order(getSortDirection(sort[1]), sort[0]));
-            }
-        }
-        else {
-            sortOrders.add(new Order(getSortDirection(sortParameters[1]), sortParameters[0]));
-        }
-
-        return sortOrders;
-    }
-
-    private boolean isMultipleSortsOrders(String[] sortParameters) {
-        return sortParameters[0].contains(",");
-    }
-
-    private Sort.Direction getSortDirection(String directionString) {
-        return directionString.contains("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
     }
 }

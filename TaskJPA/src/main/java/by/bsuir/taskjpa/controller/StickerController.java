@@ -12,13 +12,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/stickers")
-public class StickerController {
+public class StickerController extends AbstractController {
 
     private final StickerService service;
 
@@ -55,28 +54,5 @@ public class StickerController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable @Valid Long id) {
         service.delete(id);
-    }
-
-    private List<Sort.Order> getSortOrders(String[] sortParameters) {
-        List<Sort.Order> sortOrders = new ArrayList<>();
-        if (isMultipleSortsOrders(sortParameters)) {
-            for (String sortParameter : sortParameters) {
-                String[] sort = sortParameter.split(",");
-                sortOrders.add(new Sort.Order(getSortDirection(sort[1]), sort[0]));
-            }
-        }
-        else {
-            sortOrders.add(new Sort.Order(getSortDirection(sortParameters[1]), sortParameters[0]));
-        }
-
-        return sortOrders;
-    }
-
-    private boolean isMultipleSortsOrders(String[] sortParameters) {
-        return sortParameters[0].contains(",");
-    }
-
-    private Sort.Direction getSortDirection(String directionString) {
-        return directionString.contains("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
     }
 }
