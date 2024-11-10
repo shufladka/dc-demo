@@ -5,10 +5,11 @@ import by.bsuir.taskjpa.exception.EntitySavingException;
 import by.bsuir.taskjpa.model.dto.request.UserRequestTo;
 import by.bsuir.taskjpa.model.dto.response.UserResponseTo;
 import by.bsuir.taskjpa.model.mapper.UserMapper;
-import by.bsuir.taskjpa.repository.impl.UserRepository;
+import by.bsuir.taskjpa.repository.UserRepository;
 import by.bsuir.taskjpa.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,8 +32,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserResponseTo> findAll() {
-        return repository.findAll().stream().map(mapper::toResponseTo).toList();
+    public List<UserResponseTo> findAll(Pageable restriction) {
+        return repository.findAll(restriction).stream().map(mapper::toResponseTo).toList();
     }
 
     @Override
@@ -53,10 +54,10 @@ public class UserServiceImpl implements UserService {
                         entity.setPassword(userRequestTo.password());
                     }
                     if (userRequestTo.firstname() != null) {
-                        entity.setFirstName(userRequestTo.firstname());
+                        entity.setFirstname(userRequestTo.firstname());
                     }
                     if (userRequestTo.lastname() != null) {
-                        entity.setLastName(userRequestTo.lastname());
+                        entity.setLastname(userRequestTo.lastname());
                     }
                     return entity;
                 })

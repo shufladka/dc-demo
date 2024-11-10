@@ -4,13 +4,15 @@ import by.bsuir.taskjpa.exception.EntityNotFoundException;
 import by.bsuir.taskjpa.exception.EntitySavingException;
 import by.bsuir.taskjpa.model.dto.request.TweetRequestTo;
 import by.bsuir.taskjpa.model.dto.response.TweetResponseTo;
+import by.bsuir.taskjpa.model.entity.User;
 import by.bsuir.taskjpa.model.mapper.TweetMapper;
-import by.bsuir.taskjpa.repository.impl.TweetRepository;
+import by.bsuir.taskjpa.repository.TweetRepository;
+import by.bsuir.taskjpa.repository.UserRepository;
 import by.bsuir.taskjpa.service.TweetService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,21 +21,25 @@ import java.util.Optional;
 public class TweetServiceImpl implements TweetService {
 
     private final TweetRepository repository;
+    private final UserRepository userRepository;
     private final TweetMapper mapper;
     private final String entityName = "Tweet";
 
     @Override
     public TweetResponseTo save(TweetRequestTo tweetRequestTo) {
+        User userFromRequest = userRepository.findById(tweetRequestTo.userId())
+                .orElseThrow(() ->
+                        new EntityNotFoundException(entityName, tweetRequestTo.userId()));
         return Optional.of(tweetRequestTo)
-                .map(mapper::toEntity)
+                .map(request -> mapper.toEntity(request, userFromRequest))
                 .map(repository::save)
                 .map(mapper::toResponseTo)
                 .orElseThrow(() -> new EntitySavingException(entityName, tweetRequestTo.id()));
     }
 
     @Override
-    public List<TweetResponseTo> findAll() {
-        return repository.findAll().stream().map(mapper::toResponseTo).toList();
+    public List<TweetResponseTo> findAll(Pageable restriction) {
+        return repository.findAll(restriction).stream().map(mapper::toResponseTo).toList();
     }
 
     @Override
@@ -45,16 +51,11 @@ public class TweetServiceImpl implements TweetService {
 
     @Override
     public TweetResponseTo update(TweetRequestTo tweetRequestTo) {
+        User userFromRequest = userRepository.findById(tweetRequestTo.userId())
+                .orElseThrow(() ->
+                        new EntityNotFoundException(entityName, tweetRequestTo.userId()));
         return repository.findById(tweetRequestTo.id())
-                .map(entity -> {
-                    if (tweetRequestTo.userId() != null) {
-                        entity.setUserId(tweetRequestTo.userId());
-                    }
-                    entity.setTitle(tweetRequestTo.title());
-                    entity.setContent(tweetRequestTo.content());
-                    entity.setModified(LocalDateTime.now());
-                    return entity;
-                })
+                .map(entityToUpdate -> mapper.updateEntity(entityToUpdate, tweetRequestTo, userFromRequest))
                 .map(repository::save)
                 .map(mapper::toResponseTo)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(entityName + " with id %s not found", tweetRequestTo.id())));

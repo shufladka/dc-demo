@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DiffGenerationConfig">
+    <option name="snapshotDbValue" value="b3352b60-e01d-45c8-a522-ba02d8922f49" />
+    <option name="snapshotModelValue" value="taskjpa:taskjpa" />
+    <option name="sourceDbValue" value="b3352b60-e01d-45c8-a522-ba02d8922f49" />
+    <option name="sourceModelValue" value="taskjpa:taskjpa" />
+    <option name="targetDbValue" value="b3352b60-e01d-45c8-a522-ba02d8922f49" />
+  </component>
+</project>

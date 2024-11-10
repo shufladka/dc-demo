@@ -1,19 +1,29 @@
 package by.bsuir.taskjpa.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @SuperBuilder
-@EqualsAndHashCode(callSuper = true)
-public class User extends Entity {
+@Entity
+@Table(name = "tbl_user")
+public class User extends AbstractEntity {
+
+    @Column(length = 64, nullable = false, unique = true)
     private String login;
+
+    @Column(length = 128, nullable = false)
     private String password;
-    private String firstName;
-    private String lastName;
+
+    @Column(length = 64, nullable = false)
+    private String firstname;
+
+    @Column(length = 64, nullable = false)
+    private String lastname;
 }

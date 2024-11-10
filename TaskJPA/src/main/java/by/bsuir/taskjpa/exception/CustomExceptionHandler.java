@@ -3,6 +3,7 @@ package by.bsuir.taskjpa.exception;
 import by.bsuir.taskjpa.model.dto.response.ErrorResponseTo;
 import by.bsuir.taskjpa.util.ErrorsHandlerUtil;
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -28,6 +29,11 @@ public class CustomExceptionHandler {
     public ResponseEntity<ErrorResponseTo> handleConstraintViolationException(
             ConstraintViolationException e) {
         return ErrorsHandlerUtil.getErrorResponseEntity(HttpStatus.BAD_REQUEST, 3, e.getMessage());
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ErrorResponseTo> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        return ErrorsHandlerUtil.getErrorResponseEntity(HttpStatus.FORBIDDEN, 3, e.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

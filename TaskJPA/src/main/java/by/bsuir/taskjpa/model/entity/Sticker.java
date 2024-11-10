@@ -1,16 +1,20 @@
 package by.bsuir.taskjpa.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @SuperBuilder
-@EqualsAndHashCode(callSuper = true)
-public class Sticker extends Entity {
+@Entity
+@Table(name = "tbl_sticker")
+public class Sticker extends AbstractEntity {
+
+    @Column(length = 32, nullable = false, unique = true)
     private String name;
 }

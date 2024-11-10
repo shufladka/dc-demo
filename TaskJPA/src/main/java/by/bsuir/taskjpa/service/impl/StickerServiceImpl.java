@@ -5,9 +5,10 @@ import by.bsuir.taskjpa.exception.EntitySavingException;
 import by.bsuir.taskjpa.model.dto.request.StickerRequestTo;
 import by.bsuir.taskjpa.model.dto.response.StickerResponseTo;
 import by.bsuir.taskjpa.model.mapper.StickerMapper;
-import by.bsuir.taskjpa.repository.impl.StickerRepository;
+import by.bsuir.taskjpa.repository.StickerRepository;
 import by.bsuir.taskjpa.service.StickerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,8 +32,8 @@ public class StickerServiceImpl implements StickerService {
     }
 
     @Override
-    public List<StickerResponseTo> findAll() {
-        return repository.findAll().stream().map(mapper::toResponseTo).toList();
+    public List<StickerResponseTo> findAll(Pageable restriction) {
+        return repository.findAll(restriction).stream().map(mapper::toResponseTo).toList();
     }
 
     @Override
