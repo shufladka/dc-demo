@@ -33,7 +33,7 @@ public class StickerController extends AbstractController {
                                            @RequestParam(defaultValue = "5") Integer pageSize,
                                            @RequestParam(defaultValue = "id,desc") String[] sortParameters) {
 
-        List<Order> sortOrders = getSortOrders(sortParameters);
+        List<Order> sortOrders = getSortOrderList(sortParameters);
         Pageable restriction = PageRequest.of(pageNumber, pageSize, Sort.by(sortOrders));
         return service.findAll(restriction);
     }
