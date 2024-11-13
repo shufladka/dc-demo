@@ -4,6 +4,7 @@ spring:
   cassandra:
     keyspace-name: distcomp
     local-datacenter: datacenter1
+    schema-action: none
   datasource:
     url: jdbc:cassandra://localhost:9042/distcomp?localdatacenter=datacenter1
     hikari:

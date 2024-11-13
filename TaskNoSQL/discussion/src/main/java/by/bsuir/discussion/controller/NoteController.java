@@ -5,12 +5,9 @@ import by.bsuir.discussion.model.dto.response.NoteResponseTo;
 import by.bsuir.discussion.service.NoteService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.cassandra.core.query.CassandraPageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Order;
 
 import java.util.List;
 
@@ -30,12 +27,8 @@ public class NoteController extends AbstractController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<NoteResponseTo> findAll(@RequestParam(defaultValue = "0") Integer pageNumber,
-                                        @RequestParam(defaultValue = "5") Integer pageSize,
-                                        @RequestParam(defaultValue = "id,desc") String[] sortParameters) {
-
-        List<Order> sortOrders = getSortOrderList(sortParameters);
-        Pageable restriction = PageRequest.of(pageNumber, pageSize, Sort.by(sortOrders));
-        return service.findAll(restriction);
+                                        @RequestParam(defaultValue = "5") Integer pageSize) {
+        return service.findAll(CassandraPageRequest.of(pageNumber, pageSize));
     }
 
     @GetMapping("/{id}")

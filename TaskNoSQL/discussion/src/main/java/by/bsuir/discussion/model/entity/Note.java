@@ -1,11 +1,12 @@
 package by.bsuir.discussion.model.entity;
 
-import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyClass;
 import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
+import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.cassandra.core.mapping.Column;
 
 import java.io.Serializable;
 
@@ -14,7 +15,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Builder
-@Table(name = "tbl_note")
+@Table("tbl_note")
 public class Note {
 
     @PrimaryKeyClass
@@ -37,6 +38,6 @@ public class Note {
     @PrimaryKey
     private Key key;
 
-    @Column(name = "content", length = 2048, nullable = false)
+    @Column("content")
     private String content;
 }
