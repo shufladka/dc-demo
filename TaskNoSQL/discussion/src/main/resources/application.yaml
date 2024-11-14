@@ -4,14 +4,14 @@ spring:
   cassandra:
     keyspace-name: distcomp
     local-datacenter: datacenter1
-    schema-action: none
+    schema-action: create_if_not_exists
   datasource:
     url: jdbc:cassandra://localhost:9042/distcomp?localdatacenter=datacenter1
     hikari:
       minimum-idle: 2
     driver-class-name: com.ing.data.cassandra.jdbc.CassandraDriver
   liquibase:
-    enabled: false
+    enabled: true
     change-log: classpath:db/changelog/changelog-master.xml
 
 server:
