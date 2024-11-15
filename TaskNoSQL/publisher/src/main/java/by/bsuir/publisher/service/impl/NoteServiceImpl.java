@@ -8,6 +8,7 @@ import by.bsuir.publisher.model.dto.request.NoteRequestTo;
 import by.bsuir.publisher.model.dto.response.NoteResponseTo;
 import by.bsuir.publisher.repository.TweetRepository;
 import by.bsuir.publisher.service.NoteService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,9 +27,10 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public NoteResponseTo save(NoteRequestTo noteRequestTo, String country) {
-        tweetRepository.findById(noteRequestTo.tweetId())
-                .orElseThrow(() ->
-                        new EntityNotFoundException(entityName, noteRequestTo.tweetId()));
+
+        if (!tweetRepository.existsById(noteRequestTo.tweetId())) {
+            throw new EntityNotFoundException(entityName, noteRequestTo.tweetId());
+        }
 
         return Optional.of(noteRequestTo)
                 .map(request -> mapper.toRequestTo(request, country))
@@ -53,9 +55,9 @@ public class NoteServiceImpl implements NoteService {
     @Override
     public NoteResponseTo update(NoteRequestTo noteRequestTo, String country) {
         findById(noteRequestTo.id());
-        tweetRepository.findById(noteRequestTo.tweetId())
-                .orElseThrow(() ->
-                        new EntityNotFoundException(entityName, noteRequestTo.tweetId()));
+        if (!tweetRepository.existsById(noteRequestTo.tweetId())) {
+            throw new EntityNotFoundException(entityName, noteRequestTo.tweetId());
+        }
         return Optional.of(noteRequestTo)
                 .map(entityToUpdate -> mapper.toRequestTo(entityToUpdate, country))
                 .map(repository::save)

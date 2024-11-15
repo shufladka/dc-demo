@@ -15,6 +15,6 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "tbl_sticker")
 public class Sticker extends AbstractEntity {
 
-    @Column(length = 32, nullable = false, unique = true)
+    @Column(length = 32, nullable = false)
     private String name;
 }

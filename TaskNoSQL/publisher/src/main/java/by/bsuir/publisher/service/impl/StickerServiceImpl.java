@@ -46,12 +46,7 @@ public class StickerServiceImpl implements StickerService {
     @Override
     public StickerResponseTo update(StickerRequestTo stickerRequestTo) {
         return repository.findById(stickerRequestTo.id())
-                .map(entity -> {
-                    if (stickerRequestTo.name() != null) {
-                        entity.setName(stickerRequestTo.name());
-                    }
-                    return entity;
-                })
+                .map(entityToUpdate -> mapper.updateEntity(entityToUpdate, stickerRequestTo))
                 .map(repository::save)
                 .map(mapper::toResponseTo)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(entityName + " with id %s not found", stickerRequestTo.id())));

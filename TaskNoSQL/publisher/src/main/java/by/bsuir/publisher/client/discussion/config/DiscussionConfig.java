@@ -20,7 +20,7 @@ public class DiscussionConfig {
         String host = "http://127.0.0.1";
         String url = host + ":" + serverConfig.getPort() + serverConfig.getServlet().getContextPath();
         return RestClient.builder()
-                .baseUrl(url)
+                .baseUrl("http://localhost:24130/api/v1.0")
                 .build();
     }
 

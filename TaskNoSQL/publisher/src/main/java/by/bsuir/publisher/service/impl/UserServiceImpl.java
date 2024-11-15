@@ -46,21 +46,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponseTo update(UserRequestTo userRequestTo) {
         return repository.findById(userRequestTo.id())
-                .map(entity -> {
-                    if (userRequestTo.login() != null) {
-                        entity.setLogin(userRequestTo.login());
-                    }
-                    if (userRequestTo.password() != null) {
-                        entity.setPassword(userRequestTo.password());
-                    }
-                    if (userRequestTo.firstname() != null) {
-                        entity.setFirstname(userRequestTo.firstname());
-                    }
-                    if (userRequestTo.lastname() != null) {
-                        entity.setLastname(userRequestTo.lastname());
-                    }
-                    return entity;
-                })
+                .map(entityToUpdate -> mapper.updateEntity(entityToUpdate, userRequestTo))
                 .map(repository::save)
                 .map(mapper::toResponseTo)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(entityName + " with id %s not found", userRequestTo.id())));

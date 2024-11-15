@@ -5,8 +5,6 @@ import jakarta.validation.constraints.Size;
 
 public record TweetRequestTo(
         Long id,
-
-        @NotNull
         Long userId,
 
         @NotNull
