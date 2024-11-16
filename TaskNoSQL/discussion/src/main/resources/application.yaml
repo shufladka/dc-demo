@@ -1,10 +1,10 @@
 spring:
   application:
-    name: TaskNoSQL
+    name: discussion
   cassandra:
     keyspace-name: distcomp
     local-datacenter: datacenter1
-    schema-action: create_if_not_exists
+    schema-action: recreate_drop_unused
   datasource:
     url: jdbc:cassandra://localhost:9042/distcomp?localdatacenter=datacenter1
     hikari:
