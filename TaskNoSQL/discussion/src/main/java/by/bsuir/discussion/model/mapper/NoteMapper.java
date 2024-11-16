@@ -11,9 +11,9 @@ public interface NoteMapper {
     @Mapping(target = "key", expression = "java(new Note.Key(request.country(), request.id(), request.tweetId()))")
     Note toEntity(NoteRequestTo request);
 
-    @Mapping(target = "key.country", source = "country")
     @Mapping(target = "key.id", ignore = true)
     @Mapping(target = "key.tweetId", source = "tweetId")
+    @Mapping(target = "key.country", source = "country")
     Note updateEntity(@MappingTarget Note entityToUpdate, NoteRequestTo updateRequest);
 
     @Mapping(target = "id", source = "entity.key.id")

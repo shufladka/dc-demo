@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,7 +48,7 @@ public class NoteServiceImpl implements NoteService {
     public NoteResponseTo findById(Long id) {
         try {
             return repository.findById(id);
-        } catch (EntityNotFoundException e) {
+        } catch (HttpClientErrorException e) {
             throw new EntityNotFoundException(entityName, id);
         }
     }

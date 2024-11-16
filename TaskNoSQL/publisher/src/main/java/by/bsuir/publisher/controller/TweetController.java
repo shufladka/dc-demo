@@ -29,9 +29,9 @@ public class TweetController extends AbstractController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<TweetResponseTo> findAll(@RequestParam(defaultValue = "0") Integer pageNumber,
-                                         @RequestParam(defaultValue = "5") Integer pageSize,
-                                         @RequestParam(defaultValue = "id,desc") String[] sortParameters) {
+    public List<TweetResponseTo> findAll(@RequestParam(name = "page", defaultValue = "0") Integer pageNumber,
+                                         @RequestParam(name = "size", defaultValue = "5") Integer pageSize,
+                                         @RequestParam(name = "sort", defaultValue = "id,desc") String[] sortParameters) {
 
         List<Order> sortOrders = getSortOrderList(sortParameters);
         Pageable restriction = PageRequest.of(pageNumber, pageSize, Sort.by(sortOrders));
