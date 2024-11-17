@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/TaskNoSQL/pom.xml" />
         <option value="$PROJECT_DIR$/TaskNoSQL/publisher/pom.xml" />
         <option value="$PROJECT_DIR$/TaskNoSQL/discussion/pom.xml" />
+        <option value="$PROJECT_DIR$/TaskJPA/pom.xml" />
       </list>
     </option>
   </component>
