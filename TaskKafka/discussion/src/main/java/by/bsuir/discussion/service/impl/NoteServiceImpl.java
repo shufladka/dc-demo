@@ -8,6 +8,7 @@ import by.bsuir.discussion.model.entity.Note;
 import by.bsuir.discussion.model.mapper.NoteMapper;
 import by.bsuir.discussion.repository.NoteRepository;
 import by.bsuir.discussion.service.NoteService;
+import by.bsuir.discussion.util.NoteFilterUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,12 +25,14 @@ public class NoteServiceImpl implements NoteService {
 
     private final NoteRepository repository;
     private final NoteMapper mapper;
+    private final NoteFilterUtil filter;
     private final String entityName = "Note";
 
     @Override
     public NoteResponseTo save(NoteRequestTo noteRequestTo) {
         return Optional.of(noteRequestTo)
                 .map(this::generateNoteEntity)
+                .map(filter::filterNote)
                 .map(repository::save)
                 .map(mapper::toResponseTo)
                 .orElseThrow(() -> new EntitySavingException(entityName, noteRequestTo.id()));
@@ -51,6 +54,7 @@ public class NoteServiceImpl implements NoteService {
     public NoteResponseTo update(NoteRequestTo noteRequestTo) {
         return repository.findByKeyId(noteRequestTo.id())
                 .map(entityToUpdate -> mapper.updateEntity(entityToUpdate, noteRequestTo))
+                .map(filter::filterNote)
                 .map(repository::save)
                 .map(mapper::toResponseTo)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(entityName + " with id %s not found", noteRequestTo.id())));
