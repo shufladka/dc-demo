@@ -6,6 +6,8 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/TaskREST/pom.xml" />
+        <option value="$PROJECT_DIR$/TaskKafka/pom.xml" />
+        <option value="$PROJECT_DIR$/TaskKafka/publisher/pom.xml" />
       </list>
     </option>
   </component>
