@@ -34,8 +34,11 @@ public class TweetControllerTest extends AbstractControllerTest<TweetRequestTo, 
 
     private void createFKIfNotCreated() {
         if (!isFKCreated) {
-            UserRequestTo user = new UserRequestTo(null, "login", "password",
-                    "firstame", "lastname");
+            UserRequestTo user = new UserRequestTo(null,
+                    "login" + random.nextInt(),
+                    "password" + random.nextInt(),
+                    "firstame" + random.nextInt(),
+                    "lastname" + random.nextInt());
             Response userResponse = createEntityFK(user, "/users");
             fkUserId = getResponseId(userResponse);
 
