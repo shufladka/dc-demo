@@ -24,7 +24,7 @@ spring:
         spring:
           json:
             type:
-              mapping: KafkaResponseTo:by.bsuir.discussion.kafka.message.KafkaResponseTo
+              mapping: KafkaResponseTo:by.bsuir.discussion.kafka.dto.KafkaResponseTo
     consumer:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
@@ -32,9 +32,9 @@ spring:
         spring:
           json:
             type:
-              mapping: KafkaRequestTo:by.bsuir.discussion.kafka.message.KafkaRequestTo
+              mapping: KafkaRequestTo:by.bsuir.discussion.kafka.dto.KafkaRequestTo
             trusted:
-              packages: by.bsuir.discussion.kafka.message.*,by.bsuir.publisher.client.discussion.kafka.message.*,java.util,java.lang
+              packages: by.bsuir.discussion.kafka.dto.*,by.bsuir.publisher.client.discussion.kafka.dto.*,java.util,java.lang
 
 topic:
   tweet-note:

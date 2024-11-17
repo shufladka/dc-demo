@@ -208,4 +208,10 @@ public abstract class AbstractControllerTest<RequestTo, ResponseTo> {
     protected abstract String getRequestsMappingPath();
     protected abstract RequestTo getRequestTo();
     protected abstract RequestTo getUpdatedRequestTo(RequestTo requestTo, Long entityId);
+    protected Response updateRequest(RequestTo requestTo) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(requestTo)
+                .put(getRequestsMappingPath());
+    }
 }
