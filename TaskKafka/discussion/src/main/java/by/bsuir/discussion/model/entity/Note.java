@@ -40,4 +40,7 @@ public class Note {
 
     @Column("content")
     private String content;
+
+    @Column("state")
+    private NoteStateType state;
 }

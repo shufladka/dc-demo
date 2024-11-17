@@ -1,5 +1,6 @@
 package by.bsuir.discussion.model.dto.request;
 
+import by.bsuir.discussion.model.entity.NoteStateType;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -12,6 +13,9 @@ public record NoteRequestTo(
         String content,
 
         @NotNull
-        String country
+        String country,
+
+        @NotNull
+        NoteStateType state
 ) {
 }
