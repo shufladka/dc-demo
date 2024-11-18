@@ -25,6 +25,11 @@ public class CustomExceptionHandler {
         return ErrorsHandlerUtil.getErrorResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY, 1, e.getMessage());
     }
 
+    @ExceptionHandler(IncorrectRequestException.class)
+    public ResponseEntity<ErrorResponseTo> handleIncorrectRequestException(EntitySavingException e) {
+        return ErrorsHandlerUtil.getErrorResponseEntity(HttpStatus.BAD_REQUEST, 1, e.getMessage());
+    }
+
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<ErrorResponseTo> handleConstraintViolationException(
             ConstraintViolationException e) {
