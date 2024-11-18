@@ -1,7 +1,7 @@
 package by.bsuir.discussion.util;
 
 import by.bsuir.discussion.model.entity.Note;
-import by.bsuir.discussion.model.entity.NoteStateType;
+import by.bsuir.discussion.model.entity.StateType;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -23,10 +23,10 @@ public class NoteFilterUtil {
     }
 
     public Note filterNote(Note note) {
-        NoteStateType state = forbiddenWordList.stream()
+        StateType state = forbiddenWordList.stream()
                 .anyMatch(forbiddenWord -> note.getContent().matches(".*\\b" + forbiddenWord + "\\b.*"))
-                ? NoteStateType.DECLINED
-                : NoteStateType.APPROVED;
+                ? StateType.DECLINED
+                : StateType.APPROVED;
 
         note.setState(state);
         return note;

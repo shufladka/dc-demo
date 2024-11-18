@@ -3,7 +3,7 @@ package by.bsuir.discussion.controller;
 import static org.hamcrest.Matchers.is;
 import by.bsuir.discussion.model.dto.request.NoteRequestTo;
 import by.bsuir.discussion.model.dto.response.NoteResponseTo;
-import by.bsuir.discussion.model.entity.NoteStateType;
+import by.bsuir.discussion.model.entity.StateType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +25,7 @@ public class NoteControllerTest extends AbstractControllerTest<NoteRequestTo, No
                 fkTweetId,
                 "content" + random.nextInt(Integer.MAX_VALUE),
                 "country" + random.nextInt(Integer.MAX_VALUE),
-                NoteStateType.PENDING);
+                StateType.PENDING);
     }
 
     @Override
@@ -35,21 +35,21 @@ public class NoteControllerTest extends AbstractControllerTest<NoteRequestTo, No
                 requestTo.tweetId(),
                 "new content" + random.nextInt(Integer.MAX_VALUE),
                 "new country" + random.nextInt(Integer.MAX_VALUE),
-                NoteStateType.PENDING);
+                StateType.PENDING);
     }
 
     private NoteRequestTo createNoteWithForbiddenContent() {
         return new NoteRequestTo(generateKey(), fkTweetId,
                 "forbidden-word-1 content" + random.nextInt(Integer.MAX_VALUE),
                 "country" + random.nextInt(Integer.MAX_VALUE),
-                NoteStateType.PENDING);
+                StateType.PENDING);
     }
 
     private NoteRequestTo createNoteWithForbiddenContent(Long entityId) {
         return new NoteRequestTo(entityId, fkTweetId,
                 "forbidden-word-1 content" + random.nextInt(Integer.MAX_VALUE),
                 "country" + random.nextInt(Integer.MAX_VALUE),
-                NoteStateType.PENDING);
+                StateType.PENDING);
     }
 
     @Test

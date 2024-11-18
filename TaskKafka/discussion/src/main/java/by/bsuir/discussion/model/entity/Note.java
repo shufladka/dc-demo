@@ -42,5 +42,5 @@ public class Note {
     private String content;
 
     @Column("state")
-    private NoteStateType state;
+    private StateType state;
 }

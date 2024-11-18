@@ -5,14 +5,14 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public enum NoteStateType {
+public enum StateType {
     PENDING("pending"),
     APPROVED("approved"),
     DECLINED("declined");
 
     private final String state;
 
-    NoteStateType(String state) {
+    StateType(String state) {
         this.state = state;
     }
 }

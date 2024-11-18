@@ -1,5 +1,6 @@
 package by.bsuir.publisher.client.discussion.model.request;
 
+import by.bsuir.publisher.client.discussion.model.StateType;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
@@ -12,6 +13,9 @@ public record DiscussionRequestTo(
         String content,
 
         @NotNull
-        String country
+        String country,
+
+        @NotNull
+        StateType state
 ){
 }
