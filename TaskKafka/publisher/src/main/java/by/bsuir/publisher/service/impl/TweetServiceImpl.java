@@ -10,14 +10,11 @@ import by.bsuir.publisher.repository.TweetRepository;
 import by.bsuir.publisher.repository.UserRepository;
 import by.bsuir.publisher.service.TweetService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.flogger.Flogger;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +24,6 @@ public class TweetServiceImpl implements TweetService {
     private final UserRepository userRepository;
     private final TweetMapper mapper;
     private final String entityName = "Tweet";
-    private static final Logger logger = Logger.getLogger("TweetService");
 
     @Override
     public TweetResponseTo save(TweetRequestTo tweetRequestTo) {
@@ -58,7 +54,6 @@ public class TweetServiceImpl implements TweetService {
         User userFromRequest = userRepository.findById(tweetRequestTo.userId())
                 .orElseThrow(() ->
                         new EntityNotFoundException(entityName, tweetRequestTo.userId()));
-        logger.log(Level.INFO, userFromRequest.toString());
         return repository.findById(tweetRequestTo.id())
                 .map(entityToUpdate -> mapper.updateEntity(entityToUpdate, tweetRequestTo, userFromRequest))
                 .map(repository::save)

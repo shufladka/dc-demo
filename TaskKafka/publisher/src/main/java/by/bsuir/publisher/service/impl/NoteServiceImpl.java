@@ -4,15 +4,14 @@ import by.bsuir.publisher.client.discussion.DiscussionClient;
 import by.bsuir.publisher.client.discussion.model.mapper.DiscussionMapper;
 import by.bsuir.publisher.exception.EntityNotFoundException;
 import by.bsuir.publisher.exception.EntitySavingException;
+import by.bsuir.publisher.exception.IncorrectRequestException;
 import by.bsuir.publisher.model.dto.request.NoteRequestTo;
 import by.bsuir.publisher.model.dto.response.NoteResponseTo;
 import by.bsuir.publisher.repository.TweetRepository;
 import by.bsuir.publisher.service.NoteService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,15 +27,16 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public NoteResponseTo save(NoteRequestTo noteRequestTo, String country) {
-
         if (!tweetRepository.existsById(noteRequestTo.tweetId())) {
             throw new EntityNotFoundException(entityName, noteRequestTo.tweetId());
         }
 
-        return Optional.of(noteRequestTo)
-                .map(request -> mapper.toRequestTo(request, country))
-                .map(repository::save)
-                .orElseThrow(() -> new EntitySavingException(entityName, noteRequestTo.id()));
+        try {
+            return repository.save(mapper.toRequestTo(noteRequestTo, country));
+        }
+        catch (IncorrectRequestException e) {
+            throw new EntitySavingException(entityName, noteRequestTo.id());
+        }
     }
 
     @Override
@@ -48,7 +48,7 @@ public class NoteServiceImpl implements NoteService {
     public NoteResponseTo findById(Long id) {
         try {
             return repository.findById(id);
-        } catch (HttpClientErrorException e) {
+        } catch (IncorrectRequestException e) {
             throw new EntityNotFoundException(entityName, id);
         }
     }
@@ -59,10 +59,13 @@ public class NoteServiceImpl implements NoteService {
         if (!tweetRepository.existsById(noteRequestTo.tweetId())) {
             throw new EntityNotFoundException(entityName, noteRequestTo.tweetId());
         }
-        return Optional.of(noteRequestTo)
-                .map(entityToUpdate -> mapper.toRequestTo(entityToUpdate, country))
-                .map(repository::save)
-                .orElseThrow(() -> new EntityNotFoundException(String.format(entityName + " with id %s not found", noteRequestTo.id())));
+
+        try {
+            return repository.update(mapper.toRequestTo(noteRequestTo, country));
+        }
+        catch (IncorrectRequestException e) {
+            throw new EntitySavingException(entityName, noteRequestTo.id());
+        }
     }
 
     @Override
