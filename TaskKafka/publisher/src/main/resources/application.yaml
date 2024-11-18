@@ -41,7 +41,6 @@ topic:
     request: InTopic
     response: OutTopic
 
-
 server:
   port: 24110
   servlet:
