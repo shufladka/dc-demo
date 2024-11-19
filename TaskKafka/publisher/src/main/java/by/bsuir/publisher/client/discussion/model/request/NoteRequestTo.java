@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
 @Builder
-public record DiscussionRequestTo(
+public record NoteRequestTo(
         Long id,
         Long tweetId,
 

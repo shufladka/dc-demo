@@ -31,7 +31,7 @@ public class KafkaService {
         log.info("Sending request message: {}", topicMessage);
 
         String recordKey = isMessageIssued(topicMessage)
-                ? topicMessage.discussionRequestTo().tweetId().toString()
+                ? topicMessage.noteRequestTo().tweetId().toString()
                 : null;
 
         ProducerRecord<String, KafkaRequestTo> record =
@@ -53,6 +53,6 @@ public class KafkaService {
     }
 
     private boolean isMessageIssued(KafkaRequestTo topicMessage) {
-        return (topicMessage.discussionRequestTo() != null) && (topicMessage.discussionRequestTo().tweetId() != null);
+        return (topicMessage.noteRequestTo() != null) && (topicMessage.noteRequestTo().tweetId() != null);
     }
 }
