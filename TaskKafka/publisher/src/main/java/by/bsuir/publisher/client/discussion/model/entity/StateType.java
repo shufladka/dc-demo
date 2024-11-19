@@ -1,4 +1,4 @@
-package by.bsuir.publisher.client.discussion.model;
+package by.bsuir.publisher.client.discussion.model.entity;
 
 import lombok.Getter;
 import lombok.ToString;

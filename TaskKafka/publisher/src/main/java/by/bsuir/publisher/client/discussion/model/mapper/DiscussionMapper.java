@@ -8,6 +8,6 @@ import org.mapstruct.MappingConstants;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface DiscussionMapper {
 
-    @Mapping(target = "state", expression = "java(by.bsuir.publisher.client.discussion.model.StateType.PENDING)")
+    @Mapping(target = "state", expression = "java(by.bsuir.publisher.client.discussion.model.entity.StateType.PENDING)")
     NoteRequestTo toRequestTo(by.bsuir.publisher.model.dto.request.NoteRequestTo noteRequestTo, String country);
 }
