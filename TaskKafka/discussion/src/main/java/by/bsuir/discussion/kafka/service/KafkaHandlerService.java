@@ -1,5 +1,6 @@
 package by.bsuir.discussion.kafka.service;
 
+import by.bsuir.discussion.exception.EntityNotFoundException;
 import by.bsuir.discussion.exception.EntitySavingException;
 import by.bsuir.discussion.kafka.dto.KafkaRequestTo;
 import by.bsuir.discussion.kafka.dto.KafkaResponseTo;
@@ -55,7 +56,7 @@ public class KafkaHandlerService {
                     .response(List.of(note))
                     .build();
         }
-        catch (EntitySavingException e) {
+        catch (EntityNotFoundException e) {
             return KafkaResponseTo.builder()
                     .error(e.getMessage())
                     .build();
@@ -69,7 +70,7 @@ public class KafkaHandlerService {
                     .response(List.of(updatedNote))
                     .build();
         }
-        catch (EntitySavingException e) {
+        catch (EntityNotFoundException| EntitySavingException e) {
             return KafkaResponseTo.builder()
                     .error(e.getMessage())
                     .build();
@@ -81,7 +82,7 @@ public class KafkaHandlerService {
             service.delete(noteId);
             return KafkaResponseTo.builder().build();
         }
-        catch (EntitySavingException e) {
+        catch (EntityNotFoundException| EntitySavingException e) {
             return KafkaResponseTo.builder()
                     .error(e.getMessage())
                     .build();

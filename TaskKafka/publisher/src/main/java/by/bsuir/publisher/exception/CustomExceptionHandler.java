@@ -1,5 +1,7 @@
 package by.bsuir.publisher.exception;
 
+import by.bsuir.publisher.client.discussion.kafka.exception.KafkaResponseException;
+import by.bsuir.publisher.client.discussion.kafka.exception.KafkaTimeoutException;
 import by.bsuir.publisher.model.dto.response.ErrorResponseTo;
 import by.bsuir.publisher.util.ErrorsHandlerUtil;
 import jakarta.validation.ConstraintViolationException;
@@ -39,6 +41,16 @@ public class CustomExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorResponseTo> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
         return ErrorsHandlerUtil.getErrorResponseEntity(HttpStatus.FORBIDDEN, 3, e.getMessage());
+    }
+
+    @ExceptionHandler(KafkaTimeoutException.class)
+    public ResponseEntity<ErrorResponseTo> handleKafkaTimeoutException(KafkaTimeoutException e) {
+        return ErrorsHandlerUtil.getErrorResponseEntity(HttpStatus.GATEWAY_TIMEOUT, 3, e.getMessage());
+    }
+
+    @ExceptionHandler(KafkaResponseException.class)
+    public ResponseEntity<ErrorResponseTo> handleKafkaResponseException(KafkaResponseException e) {
+        return ErrorsHandlerUtil.getErrorResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, 1, e.getMessage());
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
