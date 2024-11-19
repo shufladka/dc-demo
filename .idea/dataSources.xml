@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-
-    <data-source source="LOCAL" name="distcomp@localhost" uuid="2c5e5707-4137-4a99-96db-1047eebfc02e">
-
-    <data-source source="LOCAL" name="distcomp@localhost" uuid="b3352b60-e01d-45c8-a522-ba02d8922f49">
-
+    <data-source source="LOCAL" name="distcomp@127.0.0.1" uuid="c6f6f4d6-4eba-4394-8ea8-c8a83d5fc21a">
+      <driver-ref>cassandra</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/TaskNoSQL/discussion/src/main/resources/application.yaml</remarks>
+      <jdbc-driver>com.ing.data.cassandra.jdbc.CassandraDriver</jdbc-driver>
+      <jdbc-url>jdbc:cassandra://127.0.0.1:9042/distcomp</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="distcomp@localhost" uuid="1bc3e8c2-7ce2-42e9-8215-3fbfc34ba4f2">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/TaskJPA/src/main/resources/application.yaml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/distcomp</jdbc-url>
+      <jdbc-additional-properties>
+        <property name="com.intellij.clouds.kubernetes.db.host.port" />
+        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
+        <property name="com.intellij.clouds.kubernetes.db.resource.type" value="Deployment" />
+        <property name="com.intellij.clouds.kubernetes.db.container.port" />
+      </jdbc-additional-properties>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="distcomp@localhost" uuid="b012867c-31db-4435-96fb-d1bb3cee51d1">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/TaskNoSQL/publisher/src/main/resources/application.yaml</remarks>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/distcomp</jdbc-url>
       <jdbc-additional-properties>
@@ -17,33 +39,14 @@
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-
-    <data-source source="LOCAL" name="@localhost" uuid="d45e0c8c-ba4a-43dd-9471-7d31d7513ced">
-      <driver-ref>cassandra</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.ing.data.cassandra.jdbc.CassandraDriver</jdbc-driver>
-      <jdbc-url>jdbc:cassandra://localhost:9042</jdbc-url>
-      <jdbc-additional-properties>
-        <property name="com.intellij.clouds.kubernetes.db.host.port" />
-        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
-        <property name="com.intellij.clouds.kubernetes.db.resource.type" value="Deployment" />
-        <property name="com.intellij.clouds.kubernetes.db.container.port" />
-      </jdbc-additional-properties>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="distcomp@127.0.0.1" uuid="90625cc7-e482-47d5-ac16-06ca93c0775f">
+    <data-source source="LOCAL" name="distcomp@localhost" uuid="7202d4d8-fc6f-4032-a9bc-6ce60c2eab63">
       <driver-ref>cassandra</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
+      <remarks>$PROJECT_DIR$/TaskNoSQL/discussion/src/main/resources/application.yaml</remarks>
       <jdbc-driver>com.ing.data.cassandra.jdbc.CassandraDriver</jdbc-driver>
-      <jdbc-url>jdbc:cassandra://127.0.0.1:9042/distcomp</jdbc-url>
-      <jdbc-additional-properties>
-        <property name="com.intellij.clouds.kubernetes.db.host.port" />
-        <property name="com.intellij.clouds.kubernetes.db.enabled" value="false" />
-        <property name="com.intellij.clouds.kubernetes.db.container.port" />
-      </jdbc-additional-properties>
+      <jdbc-url>jdbc:cassandra://localhost:9042/distcomp?localdatacenter=datacenter1</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-
   </component>
 </project>

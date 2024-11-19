@@ -5,6 +5,9 @@
     <file url="file://$PROJECT_DIR$/TaskNoSQL/publisher/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/TaskNoSQL/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/TaskJPA/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/TaskKafka/discussion/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/TaskKafka/publisher/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/TaskKafka/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/TaskREST/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />

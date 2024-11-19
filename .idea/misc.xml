@@ -10,6 +10,9 @@
         <option value="$PROJECT_DIR$/TaskNoSQL/publisher/pom.xml" />
         <option value="$PROJECT_DIR$/TaskNoSQL/discussion/pom.xml" />
         <option value="$PROJECT_DIR$/TaskJPA/pom.xml" />
+        <option value="$PROJECT_DIR$/TaskKafka/pom.xml" />
+        <option value="$PROJECT_DIR$/TaskKafka/discussion/pom.xml" />
+        <option value="$PROJECT_DIR$/TaskKafka/publisher/pom.xml" />
       </list>
     </option>
   </component>
