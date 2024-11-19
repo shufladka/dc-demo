@@ -13,19 +13,19 @@ public class UserControllerTest extends AbstractControllerTest<UserRequestTo, Us
     @Override
     protected UserRequestTo getRequestTo() {
         return new UserRequestTo(null,
-                "login"     + random.nextInt(),
-                "password"  + random.nextInt(),
-                "firstname" + random.nextInt(),
-                "lastname"  + random.nextInt());
+                "login"     + random.nextInt(Integer.MAX_VALUE),
+                "password"  + random.nextInt(Integer.MAX_VALUE),
+                "firstname" + random.nextInt(Integer.MAX_VALUE),
+                "lastname"  + random.nextInt(Integer.MAX_VALUE));
     }
 
     @Override
     protected UserRequestTo getUpdatedRequestTo(UserRequestTo requestTo, Long entityId) {
         return new UserRequestTo(
                 entityId,
-                requestTo.login()     + random.nextInt(),
-                requestTo.password()  + random.nextInt(),
-                requestTo.firstname() + random.nextInt(),
-                requestTo.lastname()  + random.nextInt());
+                requestTo.login()     + random.nextInt(Integer.MAX_VALUE),
+                requestTo.password()  + random.nextInt(Integer.MAX_VALUE),
+                requestTo.firstname() + random.nextInt(Integer.MAX_VALUE),
+                requestTo.lastname()  + random.nextInt(Integer.MAX_VALUE));
     }
 }

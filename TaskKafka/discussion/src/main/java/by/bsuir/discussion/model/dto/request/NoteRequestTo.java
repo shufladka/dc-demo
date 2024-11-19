@@ -9,7 +9,7 @@ public record NoteRequestTo(
         Long tweetId,
 
         @NotNull
-        @Size(min = 2, max = 2048, message = "Content must be between 8 and 128 characters.")
+        @Size(min = 2, max = 2048, message = "Content must be between 2 and 2048 characters.")
         String content,
 
         @NotNull

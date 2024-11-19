@@ -167,6 +167,13 @@ public abstract class AbstractControllerTest<RequestTo, ResponseTo> {
                 .post(getRequestsMappingPath());
     }
 
+    protected Response updateRequest(RequestTo requestTo) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(requestTo)
+                .put(getRequestsMappingPath());
+    }
+
     protected List<Response> saveRequestList(List<RequestTo> requestToList) {
         return requestToList.stream()
                 .map(this::saveRequest)

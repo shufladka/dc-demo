@@ -21,7 +21,7 @@ public class DiscussionKafkaClient implements DiscussionClient {
 
     @Override
     public NoteResponseTo save(DiscussionRequestTo entity) {
-        return Optional.of(service.receiveAndSend(
+        return Optional.of(service.sendAndReceive(
                 KafkaRequestTo.builder()
                         .operation(OperationType.SAVE)
                         .discussionRequestTo(entity)
@@ -34,7 +34,7 @@ public class DiscussionKafkaClient implements DiscussionClient {
 
     @Override
     public List<NoteResponseTo> findAll(Integer pageNumber, Integer pageSize) {
-        return Optional.of(service.receiveAndSend(
+        return Optional.of(service.sendAndReceive(
                 KafkaRequestTo.builder()
                         .operation(OperationType.FIND_ALL)
                         .pageNumber(pageNumber)
@@ -47,7 +47,7 @@ public class DiscussionKafkaClient implements DiscussionClient {
 
     @Override
     public NoteResponseTo findById(Long id) {
-        return Optional.of(service.receiveAndSend(
+        return Optional.of(service.sendAndReceive(
                         KafkaRequestTo.builder()
                                 .operation(OperationType.FIND_BY_ID)
                                 .discussionRequestTo(DiscussionRequestTo.builder().id(id).build())
@@ -60,7 +60,7 @@ public class DiscussionKafkaClient implements DiscussionClient {
 
     @Override
     public NoteResponseTo update(DiscussionRequestTo entity) {
-        return Optional.of(service.receiveAndSend(
+        return Optional.of(service.sendAndReceive(
                         KafkaRequestTo.builder()
                                 .operation(OperationType.UPDATE)
                                 .discussionRequestTo(entity)
@@ -73,7 +73,7 @@ public class DiscussionKafkaClient implements DiscussionClient {
 
     @Override
     public void delete(Long id) {
-        Optional.of(service.receiveAndSend(
+        Optional.of(service.sendAndReceive(
                         KafkaRequestTo.builder()
                                 .operation(OperationType.DELETE)
                                 .discussionRequestTo(DiscussionRequestTo.builder().id(id).build())

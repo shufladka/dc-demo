@@ -12,12 +12,12 @@ public class StickerControllerTest extends AbstractControllerTest<StickerRequest
 
     @Override
     protected StickerRequestTo getRequestTo() {
-        return new StickerRequestTo(null, "sticker #" + random.nextInt());
+        return new StickerRequestTo(null, "sticker #" + random.nextInt(Integer.MAX_VALUE));
     }
 
     @Override
     protected StickerRequestTo getUpdatedRequestTo(StickerRequestTo requestTo, Long entityId) {
         return new StickerRequestTo(entityId,
-                requestTo.name() + random.nextInt());
+                requestTo.name() + random.nextInt(Integer.MAX_VALUE));
     }
 }

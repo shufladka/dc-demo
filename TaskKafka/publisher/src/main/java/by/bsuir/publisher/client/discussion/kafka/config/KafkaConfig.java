@@ -1,8 +1,10 @@
 package by.bsuir.publisher.client.discussion.kafka.config;
 
-import org.apache.kafka.clients.admin.NewTopic;
+
 import by.bsuir.publisher.client.discussion.kafka.dto.KafkaRequestTo;
 import by.bsuir.publisher.client.discussion.kafka.dto.KafkaResponseTo;
+import org.apache.kafka.clients.admin.NewTopic;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,10 +39,7 @@ public class KafkaConfig {
         ContainerProperties containerProperties = new ContainerProperties(responseTopic);
         containerProperties.setGroupId("publisher");
 
-        KafkaMessageListenerContainer<String, KafkaResponseTo> container =
-                new KafkaMessageListenerContainer<>(consumerFactory, containerProperties);
-
-        return container;
+        return new KafkaMessageListenerContainer<>(consumerFactory, containerProperties);
     }
 
     @Bean

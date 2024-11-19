@@ -20,25 +20,25 @@ public class TweetControllerTest extends AbstractControllerTest<TweetRequestTo, 
     protected TweetRequestTo getRequestTo() {
         createFKIfNotCreated();
         return new TweetRequestTo(null, fkUserId,
-                "title" + random.nextInt(),
-                "content" + random.nextInt());
+                "title" + random.nextInt(Integer.MAX_VALUE),
+                "content" + random.nextInt(Integer.MAX_VALUE));
     }
 
     @Override
     protected TweetRequestTo getUpdatedRequestTo(TweetRequestTo requestTo, Long entityId) {
         return new TweetRequestTo(entityId,
                 requestTo.userId(),
-                "title" + random.nextInt(),
-                "content" + random.nextInt());
+                requestTo.title() + random.nextInt(Integer.MAX_VALUE),
+                requestTo.content() + random.nextInt(Integer.MAX_VALUE));
     }
 
     private void createFKIfNotCreated() {
         if (!isFKCreated) {
             UserRequestTo user = new UserRequestTo(null,
-                    "login" + random.nextInt(),
-                    "password" + random.nextInt(),
-                    "firstame" + random.nextInt(),
-                    "lastname" + random.nextInt());
+                    "login" + random.nextInt(Integer.MAX_VALUE),
+                    "password" + random.nextInt(Integer.MAX_VALUE),
+                    "firstame" + random.nextInt(Integer.MAX_VALUE),
+                    "lastname" + random.nextInt(Integer.MAX_VALUE));
             Response userResponse = createEntityFK(user, "/users");
             fkUserId = getResponseId(userResponse);
 

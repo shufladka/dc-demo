@@ -27,7 +27,7 @@ public class KafkaService {
 
     private final ReplyingKafkaTemplate<String, KafkaRequestTo, KafkaResponseTo> replyingKafkaTemplate;
 
-    public KafkaResponseTo receiveAndSend(KafkaRequestTo topicMessage) {
+    public KafkaResponseTo sendAndReceive(KafkaRequestTo topicMessage) {
         log.info("Sending request message: {}", topicMessage);
 
         String recordKey = isMessageIssued(topicMessage)
@@ -52,7 +52,7 @@ public class KafkaService {
         }
     }
 
-    private static boolean isMessageIssued(KafkaRequestTo topicMessage) {
+    private boolean isMessageIssued(KafkaRequestTo topicMessage) {
         return (topicMessage.discussionRequestTo() != null) && (topicMessage.discussionRequestTo().tweetId() != null);
     }
 }

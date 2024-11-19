@@ -5,7 +5,7 @@ import by.bsuir.discussion.kafka.dto.KafkaRequestTo;
 import by.bsuir.discussion.kafka.dto.KafkaResponseTo;
 import by.bsuir.discussion.model.dto.request.NoteRequestTo;
 import by.bsuir.discussion.model.dto.response.NoteResponseTo;
-import by.bsuir.discussion.service.impl.NoteServiceImpl;
+import by.bsuir.discussion.service.NoteService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class KafkaHandlerService {
-
-    private final NoteServiceImpl service;
+    private final NoteService service;
 
     public KafkaResponseTo handleMessage(KafkaRequestTo kafkaRequestTo) {
         return switch (kafkaRequestTo.operation()) {
