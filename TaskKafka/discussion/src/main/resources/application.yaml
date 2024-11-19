@@ -34,7 +34,7 @@ spring:
             type:
               mapping: KafkaRequestTo:by.bsuir.discussion.kafka.dto.KafkaRequestTo
             trusted:
-              packages: by.bsuir.discussion.kafka.dto.*,by.bsuir.publisher.client.discussion.kafka.dto.*,java.util,java.lang
+              packages: "*"
 
 topic:
   tweet-note:
