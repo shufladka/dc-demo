@@ -10,6 +10,10 @@ import by.bsuir.publisher.model.dto.response.NoteResponseTo;
 import by.bsuir.publisher.repository.TweetRepository;
 import by.bsuir.publisher.service.NoteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +22,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "note")
 public class NoteServiceImpl implements NoteService {
 
     private final DiscussionClient repository;
@@ -45,6 +50,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
+    @Cacheable(key = "#id")
     public NoteResponseTo findById(Long id) {
         try {
             return repository.findById(id);
@@ -54,6 +60,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
+    @CachePut(key = "#note.id")
     public NoteResponseTo update(NoteRequestTo noteRequestTo, String country) {
         findById(noteRequestTo.id());
         if (!tweetRepository.existsById(noteRequestTo.tweetId())) {
@@ -69,6 +76,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
+    @CacheEvict(key = "#id", beforeInvocation = true)
     public void delete(Long id) {
         findById(id);
         repository.delete(id);

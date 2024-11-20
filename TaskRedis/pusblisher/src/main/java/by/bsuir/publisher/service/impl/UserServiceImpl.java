@@ -8,6 +8,10 @@ import by.bsuir.publisher.model.mapper.UserMapper;
 import by.bsuir.publisher.repository.UserRepository;
 import by.bsuir.publisher.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 
@@ -16,6 +20,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "user")
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
@@ -37,6 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(key = "#id")
     public UserResponseTo findById(Long id) {
         return repository.findById(id)
                 .map(mapper::toResponseTo)
@@ -44,6 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CachePut(key = "#user.id")
     public UserResponseTo update(UserRequestTo userRequestTo) {
         return repository.findById(userRequestTo.id())
                 .map(entityToUpdate -> mapper.updateEntity(entityToUpdate, userRequestTo))
@@ -53,6 +60,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @CacheEvict(key = "#id", beforeInvocation = true)
     public void delete(Long id) {
         repository.findById(id)
                 .ifPresentOrElse(repository::delete,

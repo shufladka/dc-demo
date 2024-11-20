@@ -10,6 +10,10 @@ import by.bsuir.publisher.repository.TweetRepository;
 import by.bsuir.publisher.repository.UserRepository;
 import by.bsuir.publisher.service.TweetService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +22,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@CacheConfig(cacheNames = "tweet")
 public class TweetServiceImpl implements TweetService {
 
     private final TweetRepository repository;
@@ -43,6 +48,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
+    @Cacheable(key = "#id")
     public TweetResponseTo findById(Long id) {
         return repository.findById(id)
                 .map(mapper::toResponseTo)
@@ -50,6 +56,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
+    @CachePut(key = "#tweet.id")
     public TweetResponseTo update(TweetRequestTo tweetRequestTo) {
         User userFromRequest = userRepository.findById(tweetRequestTo.userId())
                 .orElseThrow(() ->
@@ -62,6 +69,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
+    @CacheEvict(key = "#id", beforeInvocation = true)
     public void delete(Long id) {
         repository.findById(id)
                 .ifPresentOrElse(repository::delete,
