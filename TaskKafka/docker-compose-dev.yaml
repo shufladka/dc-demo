@@ -31,5 +31,12 @@ services:
     volumes:
       - kafka-data:/var/lib/kafka/data
 
+  redis:
+    container_name: redis
+    image: redis:7.4.1
+    hostname: redis
+    ports:
+      - 6379:6379
+
 volumes:
   kafka-data:
