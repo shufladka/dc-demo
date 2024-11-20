@@ -4,7 +4,7 @@ import by.bsuir.publisher.client.discussion.kafka.dto.KafkaRequestTo;
 import by.bsuir.publisher.client.discussion.kafka.dto.KafkaResponseTo;
 import by.bsuir.publisher.client.discussion.kafka.dto.OperationType;
 import by.bsuir.publisher.client.discussion.kafka.service.KafkaService;
-import by.bsuir.publisher.client.discussion.model.request.NoteRequestTo;
+import by.bsuir.publisher.client.discussion.model.request.DiscussionRequestTo;
 import by.bsuir.publisher.exception.IncorrectRequestException;
 import by.bsuir.publisher.model.dto.response.NoteResponseTo;
 import jakarta.validation.Valid;
@@ -21,7 +21,7 @@ public class DiscussionKafkaClient implements DiscussionClient {
     private final KafkaService service;
 
     @Override
-    public NoteResponseTo save(@Valid NoteRequestTo entity) {
+    public NoteResponseTo save(@Valid DiscussionRequestTo entity) {
         return Optional.of(service.sendAndReceive(
                 KafkaRequestTo.builder()
                         .operation(OperationType.SAVE)
@@ -51,7 +51,7 @@ public class DiscussionKafkaClient implements DiscussionClient {
         return Optional.of(service.sendAndReceive(
                         KafkaRequestTo.builder()
                                 .operation(OperationType.FIND_BY_ID)
-                                .noteRequestTo(NoteRequestTo.builder().id(id).build())
+                                .noteRequestTo(DiscussionRequestTo.builder().id(id).build())
                                 .build()))
                 .filter(KafkaResponseTo::isSuccessful)
                 .map(KafkaResponseTo::response)
@@ -60,7 +60,7 @@ public class DiscussionKafkaClient implements DiscussionClient {
     }
 
     @Override
-    public NoteResponseTo update(@Valid NoteRequestTo entity) {
+    public NoteResponseTo update(@Valid DiscussionRequestTo entity) {
         return Optional.of(service.sendAndReceive(
                         KafkaRequestTo.builder()
                                 .operation(OperationType.UPDATE)
@@ -77,7 +77,7 @@ public class DiscussionKafkaClient implements DiscussionClient {
         Optional.of(service.sendAndReceive(
                         KafkaRequestTo.builder()
                                 .operation(OperationType.DELETE)
-                                .noteRequestTo(NoteRequestTo.builder().id(id).build())
+                                .noteRequestTo(DiscussionRequestTo.builder().id(id).build())
                                 .build()))
                 .filter(KafkaResponseTo::isSuccessful)
                 .orElseThrow(() -> new IncorrectRequestException("Note with id " + id + " doesn't exist"));

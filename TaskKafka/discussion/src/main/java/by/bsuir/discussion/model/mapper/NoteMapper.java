@@ -9,15 +9,19 @@ import org.mapstruct.*;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface NoteMapper {
 
-    @Mapping(target = "key", expression = "java(new Note.Key(request.country(), request.id(), request.tweetId()))")
+    @Mapping(target = "key.id", source = "id")
+    @Mapping(target = "key.tweetId", source = "tweetId")
+    @Mapping(target = "key.country", source = "country", defaultValue = "Not found")
     Note toEntity(NoteRequestTo request);
 
-    @Mapping(target = "key", expression = "java(new Note.Key(request.country(), request.id(), request.tweetId()))")
+    @Mapping(target = "key.id", source = "id")
+    @Mapping(target = "key.tweetId", source = "tweetId")
+    @Mapping(target = "key.country", source = "country", defaultValue = "Not found")
     Note toEntity(NoteRequestTo request, @Context StateType state);
 
     @Mapping(target = "key.id", ignore = true)
     @Mapping(target = "key.tweetId", source = "tweetId")
-    @Mapping(target = "key.country", source = "country")
+    @Mapping(target = "key.country", source = "country", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     Note updateEntity(@MappingTarget Note entityToUpdate, NoteRequestTo updateRequest);
 
     @Mapping(target = "id", source = "entity.key.id")

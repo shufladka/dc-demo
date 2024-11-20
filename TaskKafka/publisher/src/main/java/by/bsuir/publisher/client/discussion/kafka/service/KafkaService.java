@@ -25,10 +25,13 @@ public class KafkaService {
     @Value("${topic.tweet-note.request}")
     private String requestTopic;
 
+    @Value("${topic.tweet-note.response}")
+    private String responseTopic;
+
     private final ReplyingKafkaTemplate<String, KafkaRequestTo, KafkaResponseTo> replyingKafkaTemplate;
 
     public KafkaResponseTo sendAndReceive(KafkaRequestTo topicMessage) {
-        log.info("Sending request message: {}", topicMessage);
+        log.info("[{}] Sending request message: {}", requestTopic, topicMessage);
 
         String recordKey = isMessageIssued(topicMessage)
                 ? topicMessage.noteRequestTo().tweetId().toString()
@@ -41,7 +44,7 @@ public class KafkaService {
 
         try {
             ConsumerRecord<String, KafkaResponseTo> consumerRecord = replyFuture.get(3, TimeUnit.SECONDS);
-            log.info("Received response message: {}", consumerRecord.value());
+            log.info("[{}] Received response message: {}", responseTopic, consumerRecord.value());
             return consumerRecord.value();
         }
         catch (TimeoutException e) {
