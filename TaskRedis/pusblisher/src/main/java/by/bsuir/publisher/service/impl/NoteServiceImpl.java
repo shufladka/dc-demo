@@ -60,7 +60,7 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    @CachePut(key = "#note.id")
+    @CachePut(key = "#noteRequestTo.id")
     public NoteResponseTo update(NoteRequestTo noteRequestTo, String country) {
         findById(noteRequestTo.id());
         if (!tweetRepository.existsById(noteRequestTo.tweetId())) {

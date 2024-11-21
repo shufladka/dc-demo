@@ -56,7 +56,7 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    @CachePut(key = "#tweet.id")
+    @CachePut(key = "#tweetRequestTo.id")
     public TweetResponseTo update(TweetRequestTo tweetRequestTo) {
         User userFromRequest = userRepository.findById(tweetRequestTo.userId())
                 .orElseThrow(() ->

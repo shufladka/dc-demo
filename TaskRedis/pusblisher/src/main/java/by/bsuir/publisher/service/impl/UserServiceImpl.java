@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @CachePut(key = "#user.id")
+    @CachePut(key = "#userRequestTo.id")
     public UserResponseTo update(UserRequestTo userRequestTo) {
         return repository.findById(userRequestTo.id())
                 .map(entityToUpdate -> mapper.updateEntity(entityToUpdate, userRequestTo))

@@ -50,7 +50,7 @@ public class StickerServiceImpl implements StickerService {
     }
 
     @Override
-    @CachePut(key = "#sticker.id")
+    @CachePut(key = "#stickerRequestTo.id")
     public StickerResponseTo update(StickerRequestTo stickerRequestTo) {
         return repository.findById(stickerRequestTo.id())
                 .map(entityToUpdate -> mapper.updateEntity(entityToUpdate, stickerRequestTo))
