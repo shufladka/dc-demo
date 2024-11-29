@@ -8,7 +8,6 @@ import by.bsuir.publisher.model.dto.request.NoteRequestTo;
 import by.bsuir.publisher.model.dto.response.NoteResponseTo;
 import by.bsuir.publisher.repository.TweetRepository;
 import by.bsuir.publisher.service.NoteService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
