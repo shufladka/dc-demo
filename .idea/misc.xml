@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/TaskNoSQL/discussion/pom.xml" />
         <option value="$PROJECT_DIR$/TaskRedis/pusblisher/pom.xml" />
         <option value="$PROJECT_DIR$/TaskKafka/publisher/pom.xml" />
+        <option value="$PROJECT_DIR$/TaskNoSQL/publisher/pom.xml" />
       </list>
     </option>
   </component>
