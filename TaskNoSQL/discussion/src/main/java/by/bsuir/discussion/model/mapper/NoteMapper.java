@@ -11,12 +11,13 @@ public interface NoteMapper {
     @Mapping(target = "key", expression = "java(new Note.Key(request.country(), request.id(), request.tweetId()))")
     Note toEntity(NoteRequestTo request);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "key.country", ignore = true)
     @Mapping(target = "key.id", ignore = true)
     @Mapping(target = "key.tweetId", source = "tweetId")
-    @Mapping(target = "key.country", source = "country")
     Note updateEntity(@MappingTarget Note entityToUpdate, NoteRequestTo updateRequest);
 
-    @Mapping(target = "id", source = "entity.key.id")
-    @Mapping(target = "tweetId", source = "entity.key.tweetId")
+    @Mapping(target = "id", source = "key.id")
+    @Mapping(target = "tweetId", source = "key.tweetId")
     NoteResponseTo toResponseTo(Note entity);
 }

@@ -29,7 +29,7 @@ public class NoteController extends AbstractController {
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<NoteResponseTo> findAll(@RequestParam(name = "page", defaultValue = "0") Integer pageNumber,
-                                               @RequestParam(name = "size", defaultValue = "5") Integer pageSize) {
+                                        @RequestParam(name = "size", defaultValue = "5") Integer pageSize) {
 
         Pageable restriction = PageRequest.of(pageNumber, pageSize);
         return service.findAll(restriction);

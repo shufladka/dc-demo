@@ -61,7 +61,7 @@ public class NoteServiceImpl implements NoteService {
         }
         return Optional.of(noteRequestTo)
                 .map(entityToUpdate -> mapper.toRequestTo(entityToUpdate, country))
-                .map(repository::save)
+                .map(repository::update)
                 .orElseThrow(() -> new EntityNotFoundException(String.format(entityName + " with id %s not found", noteRequestTo.id())));
     }
 
